@@ -1,23 +1,23 @@
 {
-    "name": "02_wordcounter-g5/wordcounter",
-    "description": "Script de consola que cuente las palabras totales y las imprima",
-    "type": "Wordcounter",
-    "license": "Oriol Yllà i Adrià Velardos",
-    "require": {
+  "name": "02_wordcounter-g5/wordcounter",
+  "description": "Script de consola que cuente las palabras totales y las imprima",
+  "type": "Wordcounter",
+  "license": "propietary",
+  "require": {
     "php": "^7.1"
-    },
-    "require-dev": {
+  },
+  "require-dev": {
     "symfony/var-dumper": "^4.0",
     "phpunit/phpunit": "^6.5"
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "autoload": {
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "autoload": {
     "psr-4": {
-    "MPWAR5\\Wordcounter\\": "src/"
+      "MPWAR5\\Wordcounter\\": "src/"
     }
-    },
-    "config": {
+  },
+  "config": {
     "optimize-autoloader": true
-    }
+  }
 }
