@@ -2,5 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
-echo "Total Words: " . count(explode(" ", $argv[1]));
+use MPWAR5\Wordcounter\Counter;
 
+$counter = new Counter;
+$counter($argv[1]);
