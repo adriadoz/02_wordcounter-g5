@@ -9,6 +9,8 @@ final class Counter
     {
       $this->words = array_map('strtolower', explode(" ", $text));
       $this->keywords = array_map('strtolower', explode(" ", $keywords));
+      $this->words = array_map(array($this, "deleteInvalidChars"), $this->words);
+      $this->keywords = array_map(array($this, "deleteInvalidChars"), $this->keywords);
     }
 
     public function __invoke(): void
@@ -37,6 +39,11 @@ final class Counter
     private function countKeywordsOcurrencies ()
     {
       return count(array_intersect($this->words, $this->keywords));
+    }
+
+    private function deleteInvalidChars ($word)
+    {
+      return str_replace(array('.',',', '/', '\\', '-', '_'), '', $word);
     }
 
     private function wordStartsWithVowel ($word)
