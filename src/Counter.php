@@ -15,6 +15,7 @@ final class Counter
     {
         echo "Total Words: " . $this->countTotalWords() . "\n";
         echo "Words that start with vowel: " . $this->countVowelStartingWords() . "\n";
+        echo "Words that have more than two characters: " . $this->countMoreThanTowCharsWords() . "\n";
     }
 
     private function countTotalWords ()
@@ -27,9 +28,21 @@ final class Counter
       return count(array_filter(array_map(array($this, "wordStartsWithVowel"), $this->words)));
     }
 
+    private function countMoreThanTowCharsWords ()
+    {
+      return count(array_filter(array_map(array($this, "moreThanTwoChars"), $this->words)));
+    }
+
     private function wordStartsWithVowel ($word)
     {
       if(preg_match('/^[aeiou]/i', $word)) {
+        return $word;
+      }
+    }
+
+    private function moreThanTwoChars ($word)
+    {
+      if(strlen($word) > 2) {
         return $word;
       }
     }
