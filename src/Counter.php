@@ -4,8 +4,16 @@ namespace MPWAR5\Wordcounter;
 
 final class Counter
 {
-    public function __invoke(String $text): void
+
+    public function __construct ($text, $keywords)
     {
-        echo "Total Words: " . count(explode(" ", $text));
+      $this->text = $text;
+      $this->keywords = $keywords;
     }
+
+    public function __invoke(): void
+    {
+        echo "Total Words: " . count(explode(" ", $this->text)) . "\n";
+    }
+
 }
