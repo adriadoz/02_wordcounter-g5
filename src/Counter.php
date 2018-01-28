@@ -7,7 +7,7 @@ final class Counter
 
     public function __construct ($text, $keywords)
     {
-      $this->text = $text;
+      $this->words = explode(" ", $text);
       $this->keywords = $keywords;
     }
 
@@ -16,9 +16,9 @@ final class Counter
         echo "Total Words: " . $this->countTotalWords() . "\n";
     }
 
-
     private function countTotalWords ()
     {
-      return count(explode(" ", $this->text));
+      return count($this->words);
     }
+
 }
