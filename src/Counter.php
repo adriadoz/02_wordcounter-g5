@@ -7,8 +7,8 @@ final class Counter
 
     public function __construct ($text, $keywords)
     {
-      $this->words = explode(" ", $text);
-      $this->keywords = explode(" ", $keywords);
+      $this->words = array_map('strtolower', explode(" ", $text));
+      $this->keywords = array_map('strtolower', explode(" ", $keywords));
     }
 
     public function __invoke(): void
@@ -16,6 +16,7 @@ final class Counter
         echo "Total Words: " . $this->countTotalWords() . "\n";
         echo "Words that start with vowel: " . $this->countVowelStartingWords() . "\n";
         echo "Words that have more than two characters: " . $this->countMoreThanTowCharsWords() . "\n";
+        echo "Keywords: " . $this->countKeywordsOcurrencies() . "\n";
     }
 
     private function countTotalWords ()
@@ -31,6 +32,11 @@ final class Counter
     private function countMoreThanTowCharsWords ()
     {
       return count(array_filter(array_map(array($this, "moreThanTwoChars"), $this->words)));
+    }
+
+    private function countKeywordsOcurrencies ()
+    {
+      return count(array_intersect($this->words, $this->keywords));
     }
 
     private function wordStartsWithVowel ($word)
