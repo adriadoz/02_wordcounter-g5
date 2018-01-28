@@ -13,7 +13,12 @@ final class Counter
 
     public function __invoke(): void
     {
-        echo "Total Words: " . count(explode(" ", $this->text)) . "\n";
+        $this->countTotalWords();
+    }
+
+    private function countTotalWords ()
+    {
+      echo "Total Words: " . count(explode(" ", $this->text)) . "\n";
     }
 
 }
