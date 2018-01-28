@@ -14,6 +14,7 @@ final class Counter
     public function __invoke(): void
     {
         echo "Total Words: " . $this->countTotalWords() . "\n";
+        echo "Words that start with vowel: " . array_filter($this->countVowelStartingWords()) . "\n";
     }
 
     private function countTotalWords ()
@@ -21,4 +22,15 @@ final class Counter
       return count($this->words);
     }
 
+    private function countVowelStartingWords ()
+    {
+      return count(array_map(array($this, "wordStartsWithVowel"), $this->words));
+    }
+
+    private function wordStartsWithVowel ($word)
+    {
+      if(preg_match('/^[aeiou]/i', $word)) {
+        return $word;
+      }
+    }
 }
