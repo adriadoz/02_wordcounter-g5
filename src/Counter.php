@@ -8,7 +8,7 @@ final class Counter
     public function __construct ($text, $keywords)
     {
       $this->words = explode(" ", $text);
-      $this->keywords = $keywords;
+      $this->keywords = explode(" ", $keywords);
     }
 
     public function __invoke(): void
