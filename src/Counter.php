@@ -4,7 +4,6 @@ namespace MPWAR5\Wordcounter;
 
 final class Counter
 {
-
     public function __construct ($text, $keywords)
     {
       $this->words = array_map('strtolower', explode(" ", $text));
@@ -15,10 +14,10 @@ final class Counter
 
     public function __invoke(): void
     {
-        echo "Total Words: " . $this->countTotalWords() . "\n";
-        echo "Words that start with vowel: " . $this->countVowelStartingWords() . "\n";
-        echo "Words that have more than two characters: " . $this->countMoreThanTowCharsWords() . "\n";
-        echo "Keywords: " . $this->countKeywordsOcurrencies() . "\n";
+        Printer::printText("Total Words: " . $this->countTotalWords() . "\n");
+        Printer::printText("Words that start with vowel: " . $this->countVowelStartingWords() . "\n");
+        Printer::printText("Words that have more than two characters: " . $this->countMoreThanTowCharsWords() . "\n");
+        Printer::printText("Keywords: " . $this->countKeywordsOcurrencies() . "\n");
     }
 
     private function countTotalWords ()
