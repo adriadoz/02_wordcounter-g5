@@ -5,7 +5,7 @@ namespace MPWAR5\Wordcounter;
 final class WordsFilter {
 
 
-  public static function filter($words, $options)
+  public static function filter($words, $options): array
   {
     $output = [];
     if(array_key_exists('keywords', $options)) {
@@ -20,7 +20,7 @@ final class WordsFilter {
     return $output;
   }
 
-  private function filterVowelStartingWords($original)
+  private function filterVowelStartingWords($original): array
   {
     return array_filter(array_map(array('self', "wordStartsWithVowel"), $original));
   }
@@ -32,12 +32,12 @@ final class WordsFilter {
     }
   }
 
-  private function filterKeywords($original, $keywords)
+  private function filterKeywords($original, $keywords): array
   {
     return array_intersect($original, $keywords);
   }
 
-  private function filterMoreThanTwoCharacters($original)
+  private function filterMoreThanTwoCharacters($original): array
   {
     return array_filter(array_map(array('self', "moreThanTwoChars"), $original));
   }

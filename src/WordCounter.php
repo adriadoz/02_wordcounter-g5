@@ -6,10 +6,8 @@ final class WordCounter
 {
     public function __construct ($text, $keywords)
     {
-      $this->words = array_map('strtolower', explode(" ", $text));
-      $this->keywords = array_map('strtolower', explode(" ", $keywords));
-      $this->words = array_map(array($this, "deleteInvalidChars"), $this->words);
-      $this->keywords = array_map(array($this, "deleteInvalidChars"), $this->keywords);
+      $this->words = WordsFormatter::format(explode(" ", $text));
+      $this->keywords = WordsFormatter::format(explode(" ", $keywords));
     }
 
     public function __invoke(): void
@@ -20,24 +18,19 @@ final class WordCounter
       Printer::printText("Keywords: " . count($this->getKeywordsOcurrencies()) . "\n");
     }
 
-    private function getVowelStartingWords ()
+    private function getVowelStartingWords (): array
     {
       return WordsFilter::filter($this->words, array('vowelStarting' => true));
     }
 
-    private function getMoreThanTowCharsWords ()
+    private function getMoreThanTowCharsWords (): array
     {
       return WordsFilter::filter($this->words, array('moreThanTwoChars' => true));
     }
 
-    private function getKeywordsOcurrencies ()
+    private function getKeywordsOcurrencies (): array
     {
-      return count(WordsFilter::filter($this->words, array('keywords' => $this->keywords)));
-    }
-
-    private function deleteInvalidChars ($word)
-    {
-      return str_replace(array('.',',', '/', '\\', '-', '_'), '', $word);
+      return WordsFilter::filter($this->words, array('keywords' => $this->keywords));
     }
 
 }
