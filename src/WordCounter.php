@@ -17,8 +17,8 @@ final class WordCounter
       Printer::plainText("Words that have more than two characters: " . count($this->getMoreThanTowCharsWords()) . "\n");
       Printer::plainText("Keywords: " . count($this->getKeywordsOcurrencies()) . "\n");
       Printer::plainText("Words that have more than two characters and start with vowel: " . count($this->getLongVowelSatartingWords()) . "\n");
-      Printer::plainText("Keywords that start with vowel: " . count($this->getKeywordSatartingWords()) . "\n");
-      Printer::plainText("More than two character keywords that start with vowel: " . count($this->getLongWKeywordsStartingWithVowel()) . "\n");
+      Printer::plainText("Keywords that start with vowel: " . count($this->getKeywordVowelSatartingWords()) . "\n");
+      Printer::plainText("More than two character keywords that start with vowel: " . count($this->getLongKeywordsStartingWithVowel()) . "\n");
     }
 
     private function getVowelStartingWords (): array
@@ -41,12 +41,12 @@ final class WordCounter
       return WordsFilter::filter($this->words, array('vowelStarting' => true, 'moreThanTwoChars' => true));
     }
 
-    private function getKeywordSatartingWords (): array
+    private function getKeywordVowelSatartingWords (): array
     {
       return WordsFilter::filter($this->words, array('vowelStarting' => true, 'keywords' => $this->keywords));
     }
 
-    public function getLongWKeywordsStartingWithVowel (): array
+    public function getLongKeywordsStartingWithVowel (): array
     {
       return WordsFilter::filter($this->words, array('vowelStarting' => true, 'keywords' => $this->keywords, 'moreThanTwoChars' => true));
     }
