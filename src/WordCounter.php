@@ -15,24 +15,24 @@ final class WordCounter
     public function __invoke(): void
     {
       Printer::printText("Total Words: " . count($this->words) . "\n");
-      Printer::printText("Words that start with vowel: " . $this->countVowelStartingWords() . "\n");
-      Printer::printText("Words that have more than two characters: " . $this->countMoreThanTowCharsWords() . "\n");
-      Printer::printText("Keywords: " . $this->countKeywordsOcurrencies() . "\n");
+      Printer::printText("Words that start with vowel: " . count($this->getVowelStartingWords()) . "\n");
+      Printer::printText("Words that have more than two characters: " . count($this->getMoreThanTowCharsWords()) . "\n");
+      Printer::printText("Keywords: " . count($this->getKeywordsOcurrencies()) . "\n");
     }
 
-    private function countVowelStartingWords ()
+    private function getVowelStartingWords ()
     {
-      return count(array_filter(array_map(array($this, "wordStartsWithVowel"), $this->words)));
+      return WordsFilter::filter($this->words, array('vowelStarting' => true));
     }
 
-    private function countMoreThanTowCharsWords ()
+    private function getMoreThanTowCharsWords ()
     {
-      return count(array_filter(array_map(array($this, "moreThanTwoChars"), $this->words)));
+      return WordsFilter::filter($this->words, array('moreThanTwoChars' => true));
     }
 
-    private function countKeywordsOcurrencies ()
+    private function getKeywordsOcurrencies ()
     {
-      return count(WordsFilter::byKeyWords($this->words, $this->keywords));
+      return count(WordsFilter::filter($this->words, array('keywords' => $this->keywords)));
     }
 
     private function deleteInvalidChars ($word)
@@ -40,17 +40,4 @@ final class WordCounter
       return str_replace(array('.',',', '/', '\\', '-', '_'), '', $word);
     }
 
-    private function wordStartsWithVowel ($word)
-    {
-      if(preg_match('/^[aeiou]/i', $word)) {
-        return $word;
-      }
-    }
-
-    private function moreThanTwoChars ($word)
-    {
-      if(strlen($word) > 2) {
-        return $word;
-      }
-    }
 }
