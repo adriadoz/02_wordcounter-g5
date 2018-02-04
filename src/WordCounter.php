@@ -12,10 +12,13 @@ final class WordCounter
 
     public function __invoke(): void
     {
-      Printer::printText("Total Words: " . count($this->words) . "\n");
-      Printer::printText("Words that start with vowel: " . count($this->getVowelStartingWords()) . "\n");
-      Printer::printText("Words that have more than two characters: " . count($this->getMoreThanTowCharsWords()) . "\n");
-      Printer::printText("Keywords: " . count($this->getKeywordsOcurrencies()) . "\n");
+      Printer::plainText("Total Words: " . count($this->words) . "\n");
+      Printer::plainText("Words that start with vowel: " . count($this->getVowelStartingWords()) . "\n");
+      Printer::plainText("Words that have more than two characters: " . count($this->getMoreThanTowCharsWords()) . "\n");
+      Printer::plainText("Keywords: " . count($this->getKeywordsOcurrencies()) . "\n");
+      Printer::plainText("Words that have more than two characters and start with vowel: " . count($this->getLongVowelSatartingWords()) . "\n");
+      Printer::plainText("Keywords that start with vowel: " . count($this->getKeywordSatartingWords()) . "\n");
+      Printer::plainText("More than two character keywords that start with vowel: " . count($this->getLongWKeywordsStartingWithVowel()) . "\n");
     }
 
     private function getVowelStartingWords (): array
@@ -31,6 +34,21 @@ final class WordCounter
     private function getKeywordsOcurrencies (): array
     {
       return WordsFilter::filter($this->words, array('keywords' => $this->keywords));
+    }
+
+    private function getLongVowelSatartingWords (): array
+    {
+      return WordsFilter::filter($this->words, array('vowelStarting' => true, 'moreThanTwoChars' => true));
+    }
+
+    private function getKeywordSatartingWords (): array
+    {
+      return WordsFilter::filter($this->words, array('vowelStarting' => true, 'keywords' => $this->keywords));
+    }
+
+    public function getLongWKeywordsStartingWithVowel (): array
+    {
+      return WordsFilter::filter($this->words, array('vowelStarting' => true, 'keywords' => $this->keywords, 'moreThanTwoChars' => true));
     }
 
 }

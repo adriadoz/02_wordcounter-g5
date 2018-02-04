@@ -2,7 +2,8 @@
 
 namespace MPWAR5\Wordcounter;
 
-final class WordsFormatter {
+final class WordsFormatter
+{
 
   const INVALID_CHARS = array('.',',', '/', '\\', '-', '_');
 

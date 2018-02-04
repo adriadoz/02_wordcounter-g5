@@ -2,9 +2,10 @@
 
 namespace MPWAR5\Wordcounter;
 
-class Printer {
+class Printer
+{
 
-  public static function printText($text)
+  public static function plainText($text)
   {
     echo $text;
   }
