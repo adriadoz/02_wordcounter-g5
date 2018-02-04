@@ -2,49 +2,34 @@
 
 namespace MPWAR5\Wordcounter;
 
-final class WordsFilter
+class WordsFilter
 {
 
-  public static function filter($words, $options): array
+  public function filterVowelStartingWords($words): array
   {
-    $output = $words;
-    if(array_key_exists('keywords', $options)) {
-      $output = self::filterKeywords($words, $options['keywords']);
-    }
-    if(array_key_exists('vowelStarting', $options)) {
-      $output = self::filterVowelStartingWords($output);
-    }
-    if(array_key_exists('moreThanTwoChars', $options)) {
-      $output = self::filterMoreThanTwoCharacters($output);
-    }
-    return $output;
+    return array_filter(array_map(array('self', "wordStartsWithVowel"), $words));
   }
 
-  private function filterVowelStartingWords($original): array
+  public function filterKeywords($words, $keywords): array
   {
-    return array_filter(array_map(array('self', "wordStartsWithVowel"), $original));
+    return array_intersect($words, $keywords);
   }
 
-  private function wordStartsWithVowel ($word)
+  public function filterMoreThanTwoCharacters($words): array
   {
-    if(preg_match('/^[aeiou]/i', $word)) {
-      return $word;
-    }
-  }
-
-  private function filterKeywords($original, $keywords): array
-  {
-    return array_intersect($original, $keywords);
-  }
-
-  private function filterMoreThanTwoCharacters($original): array
-  {
-    return array_filter(array_map(array('self', "moreThanTwoChars"), $original));
+    return array_filter(array_map(array('self', "moreThanTwoChars"), $words));
   }
 
   private function moreThanTwoChars ($word)
   {
     if(strlen($word) > 2) {
+      return $word;
+    }
+  }
+
+  private function wordStartsWithVowel ($word)
+  {
+    if(preg_match('/^[aeiou]/i', $word)) {
       return $word;
     }
   }

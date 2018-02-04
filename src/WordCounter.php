@@ -23,32 +23,38 @@ final class WordCounter
 
     private function getVowelStartingWords (): array
     {
-      return WordsFilter::filter($this->words, array('vowelStarting' => true));
+      $filter = new WordsFilterStartsWithVowel();
+      return $filter($this->words);
     }
 
     private function getMoreThanTowCharsWords (): array
     {
-      return WordsFilter::filter($this->words, array('moreThanTwoChars' => true));
+      $filter = new WordsFilterMoreThanTwoCharacters();
+      return $filter($this->words);
     }
 
     private function getKeywordsOcurrencies (): array
     {
-      return WordsFilter::filter($this->words, array('keywords' => $this->keywords));
+      $filter = new WordsFilterKeywords();
+      return $filter($this->words, $this->keywords);
     }
 
     private function getLongVowelSatartingWords (): array
     {
-      return WordsFilter::filter($this->words, array('vowelStarting' => true, 'moreThanTwoChars' => true));
+      $filter = new WordsFilterLongVowelStarting();
+      return $filter($this->words);
     }
 
     private function getKeywordVowelSatartingWords (): array
     {
-      return WordsFilter::filter($this->words, array('vowelStarting' => true, 'keywords' => $this->keywords));
+      $filter = new WordsFilterVowelStartingKeywords();
+      return $filter($this->words, $this->keywords);
     }
 
     public function getLongKeywordsStartingWithVowel (): array
     {
-      return WordsFilter::filter($this->words, array('vowelStarting' => true, 'keywords' => $this->keywords, 'moreThanTwoChars' => true));
+      $filter = new WordsFilterLongKeywordsStartingWithVowel();
+      return $filter($this->words, $this->keywords);
     }
 
 }
